@@ -1,0 +1,46 @@
+img=imread('test.jpg');
+padimg=padarray(img,[1,1],1);
+[nrow,ncol,rang]=size(padimg);
+nimg=zeros(1282,722,3,'uint8');
+M=[1/9 1/9 1/9;1/9 1/9 1/9;1/9 1/9 1/9];
+for row = 2: nrow-1
+      for col = 2:ncol-1
+Rr1=padimg(row-1,col-1,1)*M(1);
+Rr2=padimg(row-1,col,1)*M(2);
+Rr3=padimg(row-1,col+1,1)*M(3);
+Rr4=padimg(row,col-1,1)*M(4);
+Rr5=padimg(row,col,1)*M(5);
+Rr6=padimg(row,col+1,1)*M(6);
+Rr7=padimg(row+1,col-1,1)*M(7);
+Rr8=padimg(row+1,col,1)*M(8);
+Rr9=padimg(row+1,col+1,1)*M(9);
+ Rg1=padimg(row-1,col-1,2)*M(1);
+Rg2=padimg(row-1,col,2)*M(2);
+Rg3=padimg(row-1,col+1,2)*M(3);
+Rg4=padimg(row,col-1,2)*M(4);
+Rg5=padimg(row,col,2)*M(5);
+Rg6=padimg(row,col+1,2)*M(6);
+Rg7=padimg(row+1,col-1,2)*M(7);
+Rg8=padimg(row+1,col,2)*M(8);
+Rg9=padimg(row+1,col+1,2)*M(9);
+ Rb1=padimg(row-1,col-1,3)*M(1);
+Rb2=padimg(row-1,col,3)*M(2);
+Rb3=padimg(row-1,col+1,3)*M(3);
+Rb4=padimg(row,col-1,3)*M(4);
+Rb5=padimg(row,col,3)*M(5);
+Rb6=padimg(row,col+1,3)*M(6);
+Rb7=padimg(row+1,col-1,3)*M(7);
+Rb8=padimg(row+1,col,3)*M(8);
+Rb9=padimg(row+1,col+1,3)*M(9);
+Rr(row,col,1)=Rr1+Rr2+Rr3+Rr4+Rr5+Rr6+Rr7+Rr8+Rr9;
+Rg(row,col,2)=Rg1+Rg2+Rg3+Rg4+Rg5+Rg6+Rg7+Rg8+Rg9;
+Rb(row,col,3)=Rb1+Rb2+Rb3+Rb4+Rb5+Rb6+Rb7+Rb8+Rb9;
+nimg(row,col,1)=Rr(row,col,1);
+nimg(row,col,2)=Rg(row,col,2);
+nimg(row,col,3)=Rb(row,col,3);
+      end
+end
+figure;
+imshow(nimg);
+figure;
+imshow(img);
